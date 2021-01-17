@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "open-movies"
+  "defaultProject": "open-movies",
+  "cli": {
+    "analytics": false
+  }
 }
