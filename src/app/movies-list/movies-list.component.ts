@@ -1,10 +1,15 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Movie } from '../movie';
 import { MovieStorageService } from '../movie-storage.service';
-import { MoviesService } from '../movies.service';
 import { QueryService } from '../query.service';
 
+export interface CardInterface {
+  imgSrc: string;
+  title: string;
+  description: string;
+  imdbID: string;
+  type: string;
+}
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -14,17 +19,15 @@ export class MoviesListComponent implements OnInit {
 
   @Input() searchInput: string;
 
-  private movies: Array<Movie> = [];
   public cardList: CardInterface[] = [];
   public p: number;
   public total: number = 0;
 
-  constructor(private moviesService: MoviesService,
+  constructor(
               private queryService: QueryService,
               private movieStorageService: MovieStorageService,
               private router: Router,
-              private cRef: ChangeDetectorRef) {
-              }
+              private cRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadMovies();
@@ -61,19 +64,11 @@ export class MoviesListComponent implements OnInit {
   public searchValueChanged() {
     this.loadMovies();
   }
+
   public pageChanged(event: number) {
     this.p = event;
-    console.log('ustawiam paginację na', event);
     
     this.movieStorageService.savePaginationToStorage(this.p);
     this.loadMovies();
   }
-}
-
-export interface CardInterface {
-  imgSrc: string;
-  title: string;
-  description: string;
-  imdbID: string;
-  type: string;
 }

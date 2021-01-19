@@ -38,18 +38,13 @@ export class MovieStorageService {
   }
 
   public getLastPaginationFromStorage(): number {
-    console.log('lastpagination', localStorage.getItem('currentPage'));
     return +localStorage.getItem('currentPage') || 1;
   }
 
-  public saveSearchToStorage(search: string) {
-    console.log('zapisuje search', search);
-    
+  public saveSearchToStorage(search: string) {    
     localStorage.setItem('search', search);
   }
-  public getLastSearchFromStorage() {
-    console.log('mam search z storage:', localStorage.getItem('search') || 'spider');
-    
+  public getLastSearchFromStorage() {    
     return localStorage.getItem('search') || 'spider';
   }
 
@@ -59,14 +54,12 @@ export class MovieStorageService {
         this.savePaginationToStorage(1);
       }
       localStorage.setItem('year', year.toString());
-      console.log('zapisuje year', year);
     } else {
       localStorage.removeItem('year');
     }
 
   }
   public getLastYearSearchFromStorage() {
-    console.log('mam year z storage', +localStorage.getItem('year') || '');
     return +localStorage.getItem('year') || '';
   }
 
@@ -76,15 +69,12 @@ export class MovieStorageService {
         this.savePaginationToStorage(1);
       }
       localStorage.setItem('type', type);
-      console.log('zapisuje type', type);
     } else {
       localStorage.removeItem('type');
     }
   }
 
   public getLastTypeSearchFromStorage() {
-    console.log('mam type z storage', localStorage.getItem('type') || undefined);
-
     return localStorage.getItem('type') || undefined;
   }
 

@@ -21,7 +21,6 @@
     <h1>Last searched: </h1>
     <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 50vh">
       <div fxLayout="row wrap">
-        <!-- loop over the cardList and show the cards -->
         <div
           *ngFor="let movie of watchedMovies"
           fxFlex="25"
@@ -31,7 +30,6 @@
           fxLayout="column"
           style="padding: 5px;"
         >
-          <!-- cards here -->
           <mat-card class="mat-elevation-z1">
             <img mat-card-image style="max-width: 150px; height: auto" [src]="movie.poster" />
             <mat-card-title> {{ movie.title }} </mat-card-title>
