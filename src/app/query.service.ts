@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MovieStorageService } from './movie-storage.service';
 import { MoviesService } from './movies.service';
 
 @Injectable({
@@ -7,15 +8,23 @@ import { MoviesService } from './movies.service';
 })
 export class QueryService {
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(
+    private moviesService: MoviesService,
+    private movieStorageService: MovieStorageService) {}
 
-  public getMovies(search: string, searchById: boolean): Observable<any>{
+  public getMovies(searchById: boolean, id: string = undefined): Observable<any>{
+    let search = this.movieStorageService.getLastSearchFromStorage();
+    let page = this.movieStorageService.getLastPaginationFromStorage();
+    let year = this.movieStorageService.getLastYearSearchFromStorage();
+    let type = this.movieStorageService.getLastTypeSearchFromStorage();
+
+    if (type === 'All') {type = ''};
+
     if (searchById) {
-      return this.moviesService.get(`&i=${search}`);
-
+      return this.moviesService.get(`&i=${id}`);
     } else {
-      return this.moviesService.get(`&s=${search}`);
-
+      return this.moviesService.get(`&s=${search}&page=${page}&y=${year}&type=${type}`);
     }
   }
+
 }

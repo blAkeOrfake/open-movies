@@ -1,8 +1,8 @@
+<app-search (searchValueChanged)="searchValueChanged()"></app-search>
 <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
     <div fxLayout="row wrap">
-      <!-- loop over the cardList and show the cards -->
       <div
-        *ngFor="let card of cardList"
+        *ngFor="let card of cardList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }"
         fxFlex="25"
         fxFlex.md="33"
         fxFlex.sm="50"
@@ -10,17 +10,21 @@
         fxLayout="column"
         style="padding: 5px;"
       >
-        <!-- cards here -->
         <mat-card class="mat-elevation-z1">
           <img mat-card-image [src]="card.imgSrc" />
           <mat-card-title> {{ card.title }} </mat-card-title>
-          <mat-card-content> {{ card.description }} </mat-card-content>
+          <mat-card-content> {{ card.description }}, {{card.type}} </mat-card-content>
           <mat-card-footer>
-            <button fxFlex mat-flat-button color="primary">
-              Do Something Button
-            </button>
-          </mat-card-footer>
+            <a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
+              <button fxFlex mat-flat-button color="primary">
+                Go to movie details
+              </button>
+            </a>
+            </mat-card-footer>
         </mat-card>
       </div>
     </div>
-  </div>
+</div>
+<div class="footer">
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>

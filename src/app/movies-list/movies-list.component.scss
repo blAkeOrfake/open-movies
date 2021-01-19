@@ -1,0 +1,14 @@
+:host {
+    display: block !important;
+}
+.footer {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 52%;
+    background-color: #7965fd;
+    color: white;
+    text-align: center;
+    border-radius: 25px 25px 0px 0px;
+}
