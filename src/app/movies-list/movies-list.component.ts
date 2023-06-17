@@ -4,71 +4,85 @@ import { MovieStorageService } from '../movie-storage.service';
 import { QueryService } from '../query.service';
 
 export interface CardInterface {
-  imgSrc: string;
-  title: string;
-  description: string;
-  imdbID: string;
-  type: string;
+	imgSrc: string;
+	title: string;
+	description: string;
+	imdbID: string;
+	type: string;
 }
 @Component({
-  selector: 'app-movies-list',
-  templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.scss']
+	selector: 'app-movies-list',
+	templateUrl: './movies-list.component.html',
+	styleUrls: ['./movies-list.component.scss']
 })
 export class MoviesListComponent implements OnInit {
 
-  @Input() searchInput: string;
+	_searchInput: string;
+	loading = false;
+	// @Input() set searchInput(value: string) {
+	// 	this._searchInput = value;
+	// 	this.loadMovies();
+	// };
+	get searchInput(): string {
+		return this._searchInput;
+	}
 
-  public cardList: CardInterface[] = [];
-  public p: number;
-  public total: number = 0;
+	public cardList: CardInterface[] = [];
+	public p: number;
+	public total: number = 0;
 
-  constructor(
-              private queryService: QueryService,
-              private movieStorageService: MovieStorageService,
-              private router: Router,
-              private cRef: ChangeDetectorRef) {}
+	constructor(
+		private queryService: QueryService,
+		private movieStorageService: MovieStorageService,
+		private router: Router,
+		private cRef: ChangeDetectorRef) {}
 
-  ngOnInit() {
-    this.loadMovies();
-  }
+	ngOnInit() {
+		// this.loadMovies();
+	}
 
-  private generateCards(movies: any) {
-    this.p = this.movieStorageService.getLastPaginationFromStorage();
+	private generateCards(movies: any) {
+		if (!movies) return;
 
-    for (let movie of movies) {
-      this.cardList.push({
-        imgSrc: movie.Poster,
-        title: movie.Title,
-        description: movie.Year,
-        imdbID: movie.imdbID,
-        type: movie.Type
-      });
-    };
+		this.p = this.movieStorageService.getLastPaginationFromStorage();
+		
+		for (let movie of movies) {
+			this.cardList.push({
+				imgSrc: movie.Poster,
+				title: movie.Title,
+				description: movie.Year,
+				imdbID: movie.imdbID,
+				type: movie.Type
+			});
+		};
+		this.loading = false;
+		this.cRef.detectChanges();    
+	}
 
-    this.cRef.detectChanges();    
-  }
+	private loadMovies() {
+		this.cardList = [];
+		this.loading = true;
+		this.queryService.getMovies(false).subscribe(data => {
+			this.total = data.totalResults;
+			this.generateCards(data.Search);
+		});
+	}
 
-  private loadMovies() {
-    this.cardList = [];
-    this.queryService.getMovies(false).subscribe(data => {
-      this.total = data.totalResults;
-      this.generateCards(data.Search);
-    });
-  }
+	public goToDetails(imdbID: string) {
+		this.router.navigateByUrl(`/details`, /* Removed unsupported properties by Angular migration: queryParams. */ {});
+	}
 
-  public goToDetails(imdbID: string) {
-    this.router.navigateByUrl(`/details`, /* Removed unsupported properties by Angular migration: queryParams. */ {});
-  }
+	public searchValueChanged(searchInputValue: string) {
+		this._searchInput = searchInputValue;
+		this.loadMovies();
 
-  public searchValueChanged() {
-    this.loadMovies();
-  }
+		document.getElementById('search-results-box').scrollIntoView( {behavior: 'smooth'});
+	}
 
-  public pageChanged(event: number) {
-    this.p = event;
-    
-    this.movieStorageService.savePaginationToStorage(this.p);
-    this.loadMovies();
-  }
+	public pageChanged(event: number) {
+		this.p = event;
+		
+		this.movieStorageService.savePaginationToStorage(this.p);
+		this.loadMovies();
+	}
 }

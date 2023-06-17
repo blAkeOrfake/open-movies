@@ -1,30 +1,77 @@
-<app-search (searchValueChanged)="searchValueChanged()"></app-search>
-<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
-    <div fxLayout="row wrap">
-      <div
-        *ngFor="let card of cardList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }"
-        fxFlex="25"
-        fxFlex.md="33"
-        fxFlex.sm="50"
-        fxFlex.xs="100"
-        fxLayout="column"
-        style="padding: 5px;"
-      >
-        <mat-card class="mat-elevation-z1">
-          <img mat-card-image [src]="card.imgSrc" />
-          <mat-card-title> {{ card.title }} </mat-card-title>
-          <mat-card-content> {{ card.description }}, {{card.type}} </mat-card-content>
-          <mat-card-footer>
-            <a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
-              <button fxFlex mat-flat-button color="primary">
-                Go to movie details
-              </button>
-            </a>
-            </mat-card-footer>
-        </mat-card>
-      </div>
-    </div>
+<div class="list-container">
+	<app-top-bar></app-top-bar>
+	<app-search (searchValueChanged)="searchValueChanged($event)"></app-search>
+	<app-now-showing></app-now-showing>
+	<app-search-categories></app-search-categories>
+
+	<div class="spinner" *ngIf="!!loading">
+		<app-loader></app-loader>
+	</div>
+	<div id="search-results-box" *ngIf="cardList && !loading">
+		<ng-container *ngIf="cardList.length > 0; else noResultsTemplate">
+			<div class="search-results__label">Search results for: <b>{{ searchInput }}</b></div>
+		</ng-container>
+
+		<ng-template #noResultsTemplate>
+			<div
+				*ngIf="searchInput?.length > 0"
+				class="search-results__no-results"
+			>
+				No results found
+			</div>
+		</ng-template>
+		<div *ngIf="cardList.length > 0" class="result-cards-list">
+			<ng-container
+				*ngFor="let card of cardList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }"
+			>
+				<mat-card class="single-card" [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
+					<img
+						mat-card-image
+						class="single-card__image"
+						[src]="card.imgSrc"
+					/>
+					<mat-card-title class="single-card__title"> {{ card.title }} </mat-card-title>
+					<mat-card-content class="single-card__content"> {{ card.description }}, {{card.type}} </mat-card-content>
+					<!-- <mat-card-footer>
+						<a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
+							<button fxFlex mat-flat-button color="primary">
+								Go to movie details
+							</button>
+						</a>
+						</mat-card-footer> -->
+				</mat-card>
+			</ng-container>
+		</div>
+	</div>
+	
+	<div class="footer-spacer">Jakub Rosner</div>
 </div>
-<div class="footer">
-  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-</div>
+<!-- <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+		<div fxLayout="row wrap">
+			<div
+				*ngFor="let card of cardList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }"
+				fxFlex="25"
+				fxFlex.md="33"
+				fxFlex.sm="50"
+				fxFlex.xs="100"
+				fxLayout="column"
+				style="padding: 5px;"
+			>
+				<mat-card class="mat-elevation-z1">
+					<img mat-card-image [src]="card.imgSrc" />
+					<mat-card-title> {{ card.title }} </mat-card-title>
+					<mat-card-content> {{ card.description }}, {{card.type}} </mat-card-content>
+					<mat-card-footer>
+						<a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
+							<button fxFlex mat-flat-button color="primary">
+								Go to movie details
+							</button>
+						</a>
+						</mat-card-footer>
+				</mat-card>
+			</div>
+		</div>
+</div> -->
+<!-- <div class="footer">
+	<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div> -->

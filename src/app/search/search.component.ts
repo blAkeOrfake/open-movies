@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
   @Output() searchValueChanged = new EventEmitter();
   public movieTypes = ['All', 'Movie', 'Series', 'Episode'];
 
+  filtersActive = false;
   public searchInput: string;
   public yearInput: number;
   public typeInput: string = this.movieTypes[0];
@@ -18,7 +19,7 @@ export class SearchComponent implements OnInit {
   constructor(private movieStorageService: MovieStorageService) {}
 
   ngOnInit(): void {
-    this.searchInput = this.movieStorageService.getLastSearchFromStorage();
+    // this.searchInput = this.movieStorageService.getLastSearchFromStorage();
     this.yearInput = +this.movieStorageService.getLastYearSearchFromStorage() || undefined;
     this.typeInput = this.movieStorageService.getLastTypeSearchFromStorage() || this.movieTypes[0];
   }
@@ -27,6 +28,10 @@ export class SearchComponent implements OnInit {
     this.movieStorageService.saveSearchToStorage(this.searchInput);
     this.movieStorageService.saveLastYearSearchToStorage(this.yearInput);
     this.movieStorageService.saveLastTypeSearchToStorage(this.typeInput);
-    this.searchValueChanged.emit();
+    this.searchValueChanged.emit(this.searchInput);
+  }
+
+  toggleFilters() {
+    this.filtersActive = !this.filtersActive;
   }
 }

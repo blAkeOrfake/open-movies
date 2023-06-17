@@ -4,10 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MoviesListComponent } from './movies-list/movies-list.component';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search/search.component';
@@ -16,6 +15,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { NowShowingComponent } from './now-showing/now-showing.component';
+import { SearchCategoriesComponent } from './search-categories/search-categories.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MoviesListComponent,
     SearchComponent,
     MovieDetailsComponent,
+    TopBarComponent,
+    NowShowingComponent,
+    SearchCategoriesComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
@@ -40,6 +46,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    LoaderComponent
+  ]
 })
 export class AppModule { }

@@ -1,26 +1,50 @@
 
-    <div fxFlex fxLayout="row wrap" fxLayoutGap="10px" >
-      <mat-card>
-        <form (ngSubmit)="handleSubmit()">
-          <mat-form-field class="example-full-width">
-            <mat-label>Search title of movie</mat-label>
-          <input matInput placeholder="ex. 'Spider" class="form-control" [(ngModel)]="searchInput" name="searchInput" value="spider">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Year of movie (optional)</mat-label>
-          <input type="number" matInput placeholder="ex. '2020" class="form-control" [(ngModel)]="yearInput" name="yearInput" value="2020">
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Type of movie (optional)</mat-label>
-          <mat-select [(ngModel)]="typeInput" name="typeInput">
-            <mat-option *ngFor="let type of movieTypes" [value]="type">
-              {{type}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button fxFlex mat-flat-button type="submit" color="primary">
-          Search
-        </button>
-      </form>
-    </mat-card>
-  </div>
+		
+<form (ngSubmit)="handleSubmit(); $event.preventDefault()">
+	<div class="searchBar">
+		<div class="searchBar__left">
+			<div class="search">
+				<span class="material-symbols-outlined clickable" (click)="handleSubmit()">
+					search
+				</span>
+			</div>
+			<div class="search-input">
+				<input
+					class="transparent-input"
+					type="text"
+					placeholder="Search movie"
+					[(ngModel)]="searchInput"
+					name="searchInput"
+				/>
+			</div>
+		</div>
+		
+		<div class="filters">
+			<span class="material-symbols-outlined clickable" (click)="toggleFilters()">
+				tune
+			</span>
+		</div>
+	</div>
+
+	<div
+		class="advanced-filters"
+		[ngClass]="{'advanced-filters--hidden': !filtersActive}"
+	>
+		<div class="advanced-filters__filter input-year">
+			<span class="material-symbols-outlined">
+				event
+			</span>
+			<input type="number"  class="transparent-filter" placeholder="ex. '2023" [(ngModel)]="yearInput" name="yearInput" />
+		</div>
+		<div class="advanced-filters__filter">
+			<span class="material-symbols-outlined">
+				verified
+			</span>
+			<mat-select class="transparent-filter" [(ngModel)]="typeInput" name="typeInput">
+				<mat-option *ngFor="let type of movieTypes" [value]="type">
+					{{type}}
+				</mat-option>
+			</mat-select>
+		</div>
+	</div>
+</form>

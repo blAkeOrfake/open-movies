@@ -1,0 +1,120 @@
+.now-showing-container {
+    margin-top: 48px;
+
+    &__label {
+        font-weight: 300;
+        font-size: 28px;
+        color: #FEFEFE;
+
+        margin-bottom: 24px;
+    }
+
+    .carousel {
+        margin: 0;
+        padding: 0;
+
+        user-select: none;
+    }
+    [type=radio] {
+        display: none;
+    }
+
+    .single-row {
+        display: flex;
+        justify-content: center;
+    }
+    .view-details-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+
+        background-color: #4DCAE7;
+        width: 140px;
+        height: 40px;
+        color: #FEFEFE;
+
+        font-size: 18px;
+
+        position: relative;
+        bottom: 36px;
+    }
+}
+
+#slider {
+    height: 400px;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  #slider label {
+    margin: auto;
+    width: 250px;
+    height: 80%;
+    border-radius: 16px;
+    position: absolute;
+    left: 0; right: 0;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  
+  #s1:checked ~ #slide4, #s2:checked ~ #slide5,
+  #s3:checked ~ #slide1, #s4:checked ~ #slide2,
+  #s5:checked ~ #slide3 {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+    transform: translate3d(-60%,0,-50px);
+    rotate: -2deg;
+  }
+  
+  #s1:checked ~ #slide5, #s2:checked ~ #slide1,
+  #s3:checked ~ #slide2, #s4:checked ~ #slide3,
+  #s5:checked ~ #slide4 {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+    transform: translate3d(-30%,0,-25px);
+    rotate: -1deg;
+  }
+  
+  #s1:checked ~ #slide1, #s2:checked ~ #slide2,
+  #s3:checked ~ #slide3, #s4:checked ~ #slide4,
+  #s5:checked ~ #slide5 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(0,0,0);
+  }
+  
+  #s1:checked ~ #slide2, #s2:checked ~ #slide3,
+  #s3:checked ~ #slide4, #s4:checked ~ #slide5,
+  #s5:checked ~ #slide1 {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+    transform: translate3d(30%,0,-25px);
+    rotate: 1deg;
+  }
+  
+  #s1:checked ~ #slide3, #s2:checked ~ #slide4,
+  #s3:checked ~ #slide5, #s4:checked ~ #slide1,
+  #s5:checked ~ #slide2 {
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.37);
+    transform: translate3d(60%,0,-50px);
+    rotate: 2deg;
+  }
+  
+    #slide1 {
+        background: #00BCD4;
+        content: url('../../assets/images/img_avengers.jpeg');
+    }
+    #slide2 {
+        background: #4CAF50;
+        content: url('../../assets/images/img_hmf.jpeg')
+    }
+    #slide3 {
+        background: #CDDC39;
+        content: url('../../assets/images/img_top_gun.jpeg')
+    }
+    #slide4 {
+        background: #FFC107;
+        content: url('../../assets/images/img_gotg.jpeg')
+    }
+    #slide5 {
+        background: #FF5722;
+        content: url('../../assets/images/img_fast.jpeg')
+    }
