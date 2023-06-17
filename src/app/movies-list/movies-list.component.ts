@@ -58,7 +58,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   public goToDetails(imdbID: string) {
-    this.router.navigateByUrl(`/details`, {queryParams: {imdbID: imdbID}});
+    this.router.navigateByUrl(`/details`, /* Removed unsupported properties by Angular migration: queryParams. */ {});
   }
 
   public searchValueChanged() {
