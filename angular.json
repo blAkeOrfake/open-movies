@@ -119,7 +119,6 @@
       }
     }
   },
-  "defaultProject": "open-movies",
   "cli": {
     "analytics": false
   }
