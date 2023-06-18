@@ -12,7 +12,7 @@
   </div>
   <div class="details-container__content">
     <div class="details-container__content__poster">
-      <img [src]="movie?.Poster" alt="Movie poster image"/>
+      <img [src]="movie?.Poster" alt="Loading"/>
     </div>
     <div class="details-container__content__info">
       <div class="movie-title">{{ movie?.Title }}</div>
@@ -38,49 +38,24 @@
   </div>
   <div class="details-container__footer">
     <div class="details-container__footer__label"><b>Previously</b> viewed</div>
+    <div class="viewed-cards-list">
+      <ng-container
+        *ngFor="let movie of watchedMovies"
+      >
+        <mat-card class="single-card" [routerLink]="['/details']" [queryParams]="{id: movie.imdbID}">
+          <img
+            mat-card-image
+            class="single-card__image"
+            [src]="movie.poster"
+            alt="card image"
+          />
+          <mat-card-title class="single-card__title"> {{ movie.title }} </mat-card-title>
+        </mat-card>
+      </ng-container>
+    </div>
   </div>
 </div>
 
-
-<!-- <mat-card id='main' class="mat-elevation-z1">
-    <img [src]="movie.Poster" alt="Movie poster image"/>
-    <mat-card-title> {{ movie.Title }} </mat-card-title>
-    <mat-card-content> 
-        <b>Actors: </b> {{movie.Actors}} <br />
-        <b>Awards: </b> {{movie.Awards}} <br />
-        <b>BoxOffice: </b> {{movie.BoxOffice}} <br />
-        <b>Country: </b> {{movie.Country}} <br />
-        <b>DVD: </b> {{movie.DVD}} <br />
-        <b>Director: </b> {{movie.Director}} <br />
-        <b>Genre: </b> {{movie.Genre}} <br />
-        <b>Language: </b> {{movie.Language}} <br />
-        <b>Metascore: </b> {{movie.Metascore}} <br />
-        <b>Plot: </b> {{movie.Plot}} <br />
-        <b>Production: </b> {{movie.Production}} <br />
-    </mat-card-content>
-  </mat-card>
-
-  <hr>
-  <mat-card *ngIf="watchedMovies" class="mat-elevation-z1">
-    <h1>Last searched: </h1>
-    <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 50vh">
-      <div fxLayout="row wrap">
-        <div
-          *ngFor="let movie of watchedMovies"
-          fxFlex="25"
-          fxFlex.md="33"
-          fxFlex.sm="50"
-          fxFlex.xs="100"
-          fxLayout="column"
-          style="padding: 5px;"
-        >
-          <mat-card class="mat-elevation-z1">
-            <img mat-card-image style="max-width: 150px; height: auto" [src]="movie.poster" alt="Movie poster image"/>
-            <mat-card-title> {{ movie.title }} </mat-card-title>
-          </mat-card>
-        </div>
-      </div>
-    </div>
-  </mat-card>
-  
-   -->
+<div class="buy-ticket-footer">
+    <button mat-button class="buy-ticket-footer__btn" (click)="buyTicket()">Buy ticket</button>
+</div>

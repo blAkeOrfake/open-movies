@@ -20,6 +20,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { NowShowingComponent } from './now-showing/now-showing.component';
 import { SearchCategoriesComponent } from './search-categories/search-categories.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
     NowShowingComponent,
     SearchCategoriesComponent,
     LoaderComponent,
+    TicketPurchaseComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,13 +33,6 @@
 					/>
 					<mat-card-title class="single-card__title"> {{ card.title }} </mat-card-title>
 					<mat-card-content class="single-card__content"> {{ card.description }}, {{card.type}} </mat-card-content>
-					<!-- <mat-card-footer>
-						<a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
-							<button fxFlex mat-flat-button color="primary">
-								Go to movie details
-							</button>
-						</a>
-						</mat-card-footer> -->
 				</mat-card>
 			</ng-container>
 		</div>
@@ -47,32 +40,3 @@
 	
 	<div class="footer-spacer">Jakub Rosner</div>
 </div>
-<!-- <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
-		<div fxLayout="row wrap">
-			<div
-				*ngFor="let card of cardList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: total }"
-				fxFlex="25"
-				fxFlex.md="33"
-				fxFlex.sm="50"
-				fxFlex.xs="100"
-				fxLayout="column"
-				style="padding: 5px;"
-			>
-				<mat-card class="mat-elevation-z1">
-					<img mat-card-image [src]="card.imgSrc" />
-					<mat-card-title> {{ card.title }} </mat-card-title>
-					<mat-card-content> {{ card.description }}, {{card.type}} </mat-card-content>
-					<mat-card-footer>
-						<a [routerLink]="['/details']" [queryParams]="{id: card.imdbID}">
-							<button fxFlex mat-flat-button color="primary">
-								Go to movie details
-							</button>
-						</a>
-						</mat-card-footer>
-				</mat-card>
-			</div>
-		</div>
-</div> -->
-<!-- <div class="footer">
-	<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-</div> -->

@@ -12,8 +12,6 @@
 
     padding-bottom: 100px;
 
-    // border: 1px dashed red;
-
     &__header {
         display: flex;
         justify-content: space-between;
@@ -62,8 +60,12 @@
                 border-radius: 24px;
                 width: 100%;
                 height: 100%;
+                min-width: 300px;
+                min-height: 420px;
                 max-width: 300px;
                 max-height: 450px;
+
+                background-color: #626B84a8;
 
                 -webkit-box-reflect: below 1px -webkit-gradient(linear, right top, right bottom, from(transparent), color-stop(90%, transparent), to(rgba(255, 255, 255, 0.1)));
                 -webkit-box-shadow: 8px 8px 45px 3px rgba(66, 68, 90, 1);
@@ -121,8 +123,6 @@
         font-weight: 300;
         font-size: 28px;
         color: #FEFEFE;
-
-        // margin-bottom: 24px;
     }
     &__footer {
         margin-top: 48px;
@@ -131,6 +131,36 @@
             font-weight: 300;
             font-size: 24px;
             color: #FEFEFE;
+        }
+
+        .viewed-cards-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+
+            margin-top: 24px;
+            padding-bottom: 100px;
+        
+            .single-card {
+                width: 170px;
+                border-radius: 16px;
+                background-color: #2C3758;
+        
+                cursor: pointer;
+        
+                &__image {
+                    min-width: 170px;
+                    min-height: 200px;
+                    background-color: rgba(98, 107, 132, 0.6588235294);
+                }
+                &__title {
+                    padding: 16px;
+                    color: #FEFEFE;
+                    background-color: #2C3758;
+                    border-radius: 16px;
+                }
+            }
         }
     }
 }
@@ -143,4 +173,32 @@
     display: inline-block;
     margin-right: 8px;
     margin-left: 8px;
+}
+
+.buy-ticket-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0px;
+
+    background: rgb(2,0,36);
+background: linear-gradient(180deg, rgba(2,0,36,0.07889093137254899) 0%, rgba(3,12,52,0.5578825280112045) 30%, rgba(4,14,55,0.8015800070028012) 51%, rgba(4,16,58,0.9472382703081232) 70%);
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        background-color: #4DCAE7;
+        width: 250px;
+        height: 64px;
+        color: #FEFEFE !important;
+        font-family: Roboto;
+        letter-spacing: normal;
+        font-size: 24px;
+        position: relative;
+        bottom: 8px;
+    }
 }

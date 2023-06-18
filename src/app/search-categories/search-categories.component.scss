@@ -1,12 +1,21 @@
 .search-categories-container {
     margin-top: 16px;
 
+    &__top {
+        display: flex;
+        justify-content: space-between;
+    }
     &__label {
         font-weight: 300;
         font-size: 28px;
         color: #FEFEFE;
 
         margin-bottom: 24px;
+    }
+    &__subLabel {
+        font-weight: 300;
+        font-size: 22px;
+        color: #7e88a6;
     }
 
     .categories-list {

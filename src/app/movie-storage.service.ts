@@ -10,9 +10,9 @@ class StorageMovieClass {
 })
 export class MovieStorageService {
 
-	public addMovieToStorage(titleParam: string, posterParam: string) {
+	public addMovieToStorage(titleParam: string, posterParam: string, imdbIdParam: string) {
 		const savedMovies = [];
-		savedMovies.push({title: titleParam, poster: posterParam});
+		savedMovies.push({title: titleParam, poster: posterParam, imdbID: imdbIdParam});
 		let s: any = localStorage.getItem('savedMovies');
 
 		if (s) {
