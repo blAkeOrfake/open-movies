@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../movie';
 import { MovieStorageService } from '../movie-storage.service';
 import { QueryService } from '../query.service';
@@ -19,6 +19,7 @@ export class MovieDetailsComponent implements OnInit {
 	private p: number;
 
 	constructor(
+		private router: Router,
 		private route: ActivatedRoute,
 		private queryService: QueryService,
 		private movieStorageService: MovieStorageService
@@ -27,16 +28,14 @@ export class MovieDetailsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.watchedMovies = this.movieStorageService.getMoviesFromStorage();
+		this.watchedMovies = this.movieStorageService.getMoviesFromStorage().filter(x => !!x.title && x.title !== 'unknown');
 		const imdbID = this.route.snapshot.queryParamMap.get('id');
 
 		this.queryService.getMovies(true, imdbID).subscribe(data => {
 			this.movie = data;
-			// this.movie.rating = this.calculateRating(data.Ratings);
 			console.log('movie', this.movie);
-			this.movieStorageService.addMovieToStorage(data?.Title || 'unknown', data?.Poster || 'unknown');
+			this.movieStorageService.addMovieToStorage(data?.Title || 'unknown', data?.Poster || 'unknown', data?.imdbID);
 		})
-		
 	}
 
 	ratingStars(): {full: boolean}[] {
@@ -65,12 +64,14 @@ export class MovieDetailsComponent implements OnInit {
 		}
 		// average ratings
 		rating = rating / 3;
-		console.log('rating', rating);
-		return rating/2;
+		return rating / 2;
 	}
 
 	goBack(): void {
 		window.history.back();
 	}
 
+	buyTicket(): void {
+		this.router.navigate(['buyTicket'], { queryParams: { id: this.movie?.imdbID}})
+	}
 }
