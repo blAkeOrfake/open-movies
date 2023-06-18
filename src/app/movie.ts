@@ -12,7 +12,7 @@ export class Movie {
     Poster: string;
     Production: string;
     Rated: string;
-    Ratings: Array<{}>;
+    Ratings: Array<object>;
     Released: string;
     Response: string;
     Runtime: string;

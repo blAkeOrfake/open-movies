@@ -13,12 +13,12 @@ export class QueryService {
     private movieStorageService: MovieStorageService) {}
 
   public getMovies(searchById: boolean, id: string = undefined): Observable<any>{
-    let search = this.movieStorageService.getLastSearchFromStorage();
-    let page = this.movieStorageService.getLastPaginationFromStorage();
-    let year = this.movieStorageService.getLastYearSearchFromStorage();
+    const search = this.movieStorageService.getLastSearchFromStorage();
+    const page = this.movieStorageService.getLastPaginationFromStorage();
+    const year = this.movieStorageService.getLastYearSearchFromStorage();
     let type = this.movieStorageService.getLastTypeSearchFromStorage();
 
-    if (type === 'All') {type = ''};
+    if (type === 'All') {type = ''}
 
     if (searchById) {
       return this.moviesService.get(`&i=${id}`);

@@ -1,5 +1,5 @@
 <mat-card id='main' class="mat-elevation-z1">
-    <img [src]="movie.Poster" />
+    <img [src]="movie.Poster" alt="Movie poster image"/>
     <mat-card-title> {{ movie.Title }} </mat-card-title>
     <mat-card-content> 
         <b>Actors: </b> {{movie.Actors}} <br />
@@ -31,7 +31,7 @@
           style="padding: 5px;"
         >
           <mat-card class="mat-elevation-z1">
-            <img mat-card-image style="max-width: 150px; height: auto" [src]="movie.poster" />
+            <img mat-card-image style="max-width: 150px; height: auto" [src]="movie.poster" alt="Movie poster image"/>
             <mat-card-title> {{ movie.title }} </mat-card-title>
           </mat-card>
         </div>

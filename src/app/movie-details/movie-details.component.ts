@@ -26,7 +26,7 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.watchedMovies = this.movieStorageService.getMoviesFromStorage();
-    let imdbID = this.route.snapshot.queryParamMap.get('id');
+    const imdbID = this.route.snapshot.queryParamMap.get('id');
 
     this.queryService.getMovies(true, imdbID).subscribe(data => {
       this.movie = data;

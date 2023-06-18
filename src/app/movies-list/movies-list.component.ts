@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieStorageService } from '../movie-storage.service';
 import { QueryService } from '../query.service';
@@ -15,7 +15,7 @@ export interface CardInterface {
 	templateUrl: './movies-list.component.html',
 	styleUrls: ['./movies-list.component.scss']
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent {
 
 	_searchInput: string;
 	loading = false;
@@ -29,7 +29,7 @@ export class MoviesListComponent implements OnInit {
 
 	public cardList: CardInterface[] = [];
 	public p: number;
-	public total: number = 0;
+	public total = 0;
 
 	constructor(
 		private queryService: QueryService,
@@ -37,16 +37,13 @@ export class MoviesListComponent implements OnInit {
 		private router: Router,
 		private cRef: ChangeDetectorRef) {}
 
-	ngOnInit() {
-		// this.loadMovies();
-	}
 
 	private generateCards(movies: any) {
 		if (!movies) return;
 
 		this.p = this.movieStorageService.getLastPaginationFromStorage();
 		
-		for (let movie of movies) {
+		for (const movie of movies) {
 			this.cardList.push({
 				imgSrc: movie.Poster,
 				title: movie.Title,
@@ -54,7 +51,7 @@ export class MoviesListComponent implements OnInit {
 				imdbID: movie.imdbID,
 				type: movie.Type
 			});
-		};
+		}
 		this.loading = false;
 		this.cRef.detectChanges();    
 	}
