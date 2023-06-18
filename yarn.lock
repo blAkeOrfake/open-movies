@@ -6326,6 +6326,11 @@ make-fetch-happen@^11.0.0, make-fetch-happen@^11.0.1, make-fetch-happen@^11.0.3,
     socks-proxy-agent "^7.0.0"
     ssri "^10.0.0"
 
+material-icons@^1.13.8:
+  version "1.13.8"
+  resolved "https://registry.npmjs.org/material-icons/-/material-icons-1.13.8.tgz"
+  integrity sha512-vnLGXKa/AwFUxUgkiX39EpYVFttPhDQcKdVylIqmUUqz+Eo/O9A3BkdPCU3/G5cJOTezHi5B/b8sEpKYgUNAwQ==
+
 material-symbols@^0.8.0:
   version "0.8.0"
   resolved "https://registry.npmjs.org/material-symbols/-/material-symbols-0.8.0.tgz"

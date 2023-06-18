@@ -1,4 +1,48 @@
-<mat-card id='main' class="mat-elevation-z1">
+<div class="details-container">
+  <div class="details-container__header">
+    <button
+      mat-fab
+      class="back-icon-btn"
+      (click)="goBack()"
+    >
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <div class="details-container__label">Movie Details</div>
+    <div style="width: 48px;"></div>
+  </div>
+  <div class="details-container__content">
+    <div class="details-container__content__poster">
+      <img [src]="movie?.Poster" alt="Movie poster image"/>
+    </div>
+    <div class="details-container__content__info">
+      <div class="movie-title">{{ movie?.Title }}</div>
+      <div class="movie-info">
+        <div class="movie-info__year">{{ movie?.Year}}</div>
+        <div class="dot"></div>
+        <div class="movie-info__category">{{ movie?.Genre }}</div>
+        <div class="dot"></div>
+        <div class="movie-info__length">{{ movie?.Runtime }}</div>
+      </div>
+      <div class="movie-rating">
+        <ng-container *ngFor="let rating of ratingStars()">
+          <span class="material-icons-outlined star-icon" [ngClass]="{'star-full': !!rating.full}">
+            star
+          </span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="details-container__content__description">
+      <div class="details-container__label"><b>Plot</b> Summary</div>
+      <p class="description-text">{{ movie?.Plot }}</p>
+    </div>
+  </div>
+  <div class="details-container__footer">
+    <div class="details-container__footer__label"><b>Previously</b> viewed</div>
+  </div>
+</div>
+
+
+<!-- <mat-card id='main' class="mat-elevation-z1">
     <img [src]="movie.Poster" alt="Movie poster image"/>
     <mat-card-title> {{ movie.Title }} </mat-card-title>
     <mat-card-content> 
@@ -39,4 +83,4 @@
     </div>
   </mat-card>
   
-  
+   -->

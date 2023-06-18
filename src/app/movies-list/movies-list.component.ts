@@ -62,6 +62,9 @@ export class MoviesListComponent {
 		this.queryService.getMovies(false).subscribe(data => {
 			this.total = data.totalResults;
 			this.generateCards(data.Search);
+		}, error => {
+			this.loading = false;
+			console.warn(error);
 		});
 	}
 

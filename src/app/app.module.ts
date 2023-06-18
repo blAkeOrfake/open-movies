@@ -13,6 +13,7 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -43,7 +44,9 @@ import { LoaderComponent } from './shared/loader/loader.component';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],

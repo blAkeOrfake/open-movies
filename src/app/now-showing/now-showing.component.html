@@ -8,15 +8,15 @@
             <input type="radio" name="slider" id="s3" checked>
             <input type="radio" name="slider" id="s4">
             <input type="radio" name="slider" id="s5">
-            <label for="s1" id="slide1"></label>
-            <label for="s2" id="slide2"></label>
-            <label for="s3" id="slide3"></label>
-            <label for="s4" id="slide4"></label>
-            <label for="s5" id="slide5"></label>
+            <label for="s1" id="slide1" name="avengers"></label>
+            <label for="s2" id="slide2" name="hmf"></label>
+            <label for="s3" id="slide3" name="topgun"></label>
+            <label for="s4" id="slide4" name="gog"></label>
+            <label for="s5" id="slide5" name="fast"></label>
           </section>
     </div>
 
     <div class="single-row">
-        <div class="view-details-btn">View details</div>
+        <button mat-button class="view-details-btn" (click)="goToMovieDetails()">View details</button>
     </div>
 </div>
