@@ -116,6 +116,14 @@
             }
           }
         },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://blakeorfake.github.io/open-movies/",
+            "name": "Jakub Rosner",
+            "email": "jakub.rosner@outlook.com"
+          }
+        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
