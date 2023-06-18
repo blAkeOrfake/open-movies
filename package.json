@@ -5,9 +5,9 @@
     "ng": "ng",
     "start": "node --max_old_space_size=8048 --openssl-legacy-provider ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href https://blAkeOrfake.github.io/open-movies/",
+    "build:prod": "ng build --deploy-url /open-movies/",
     "test": "ng test",
-    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
