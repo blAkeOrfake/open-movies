@@ -1,0 +1,29 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+
+<div class="ticket-container">
+	<div class="ticket-container__header">
+		<button
+			mat-fab
+			class="back-icon-btn"
+			(click)="goBack()"
+		>
+			<mat-icon>arrow_back_ios</mat-icon>
+		</button>
+		<div class="ticket-container__label">Your receipt</div>
+		<div style="width: 48px;"></div>
+	</div>
+	<div class="ticket-container__content">
+        <table>
+            <tr><td class="label">Movie: </td><td class="value"> {{ receipt.title }}</td></tr>
+            <tr><td class="label">Date: </td><td class="value"> {{ receipt.date | date: 'fullDate'}}</td></tr>
+            <tr><td class="label">Tickets: </td><td class="value"> {{ receipt.tickets }}x</td></tr>
+
+            <tr><td class="label">Seats: </td><td class="value"> {{ receipt.seats?.join(', ') }}</td></tr>
+            <tr><td class="label">Total: </td><td class="value"> ${{ receipt.total | number:'2.2' }}</td></tr>
+        </table>
+	</div>
+	<div class="ticket-container__footer">
+		
+	</div>
+</div>

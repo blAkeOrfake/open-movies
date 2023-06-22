@@ -28,12 +28,13 @@ export class MovieDetailsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.watchedMovies = this.movieStorageService.getMoviesFromStorage().filter(x => !!x.title && x.title !== 'unknown');
+		this.watchedMovies = this.movieStorageService.getMoviesFromStorage()?.filter(x => !!x.title && x.title !== 'unknown');
 		const imdbID = this.route.snapshot.queryParamMap.get('id');
 
 		this.queryService.getMovies(true, imdbID).subscribe(data => {
 			this.movie = data;
 			console.log('movie', this.movie);
+			this.movieStorageService.setCurrentMovie(this.movie);
 			this.movieStorageService.addMovieToStorage(data?.Title || 'unknown', data?.Poster || 'unknown', data?.imdbID);
 		})
 	}
@@ -68,7 +69,8 @@ export class MovieDetailsComponent implements OnInit {
 	}
 
 	goBack(): void {
-		window.history.back();
+		// window.history.back();
+		this.router.navigate(['/']);
 	}
 
 	buyTicket(): void {

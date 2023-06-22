@@ -1,12 +1,75 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MovieStorageService } from '../movie-storage.service';
+import { Router } from '@angular/router';
+import { ReceiptService } from '../receipt.service';
 
 @Component({
-  templateUrl: './ticket-purchase.component.html',
-  styleUrls: ['./ticket-purchase.component.scss']
+	templateUrl: './ticket-purchase.component.html',
+	styleUrls: ['./ticket-purchase.component.scss']
 })
-export class TicketPurchaseComponent {
+export class TicketPurchaseComponent implements OnInit {
+	readonly ticketPrice = 18.99;
 
-  goBack(): void {
+	selectedDate = Date.now();
+	allSeats = Array(60).fill(0).map((x,i)=>i);
+	reservedSeats = [11, 20, 32, 33, 47, 48, 53, 54, 57];
+	selectedSeats = [];
+
+	currentMovie = null
+
+	purchaseForm: FormGroup = new FormGroup({
+		date: new FormControl(Date.now(), Validators.required),
+	})
+
+	constructor(
+		private movieStorageService: MovieStorageService,
+		private cd: ChangeDetectorRef,
+		private router: Router,
+		private receiptService: ReceiptService
+	) {
+
+	}
+	ngOnInit() {
+		this.currentMovie = this.movieStorageService.getCurrentMovie();
+		this.cd.detectChanges();
+		console.log('currentMovie', this.currentMovie);
+	}
+
+	isSeatReserved(seatNumber: number): boolean {
+		return this.reservedSeats.indexOf(seatNumber) > -1;
+	}
+	isSeatSelected(seatNumber: number): boolean {
+		return this.selectedSeats.indexOf(seatNumber) > -1;
+	}
+
+	toggleSeat(seatNumber: number): void {
+		if (this.isSeatReserved(seatNumber)) return;
+
+		const index = this.selectedSeats.indexOf(seatNumber);
+		if (index > -1) {
+			this.selectedSeats.splice(index, 1)
+		} else {
+			this.selectedSeats.push(seatNumber);
+		}
+		console.log(this.selectedSeats);
+	}
+
+	getTotalPrice(): number {
+		return (this.ticketPrice * this.selectedSeats.length) || 0.00;
+	}
+	goBack(): void {
 		window.history.back();
+	}
+
+	buyNow(): void {
+		this.receiptService.setCurrentReceipt({
+			title: this.currentMovie.Title,
+			tickets: this.selectedSeats.length,
+			date: this.purchaseForm.value.date,
+			total: this.getTotalPrice(),
+			seats: this.selectedSeats
+		})
+		this.router.navigate(['purchaseFinalized'], { queryParams: {}})
 	}
 }

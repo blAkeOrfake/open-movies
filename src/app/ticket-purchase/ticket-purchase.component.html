@@ -1,13 +1,79 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+
 <div class="ticket-container">
-    <div class="ticket-container__header">
-      <button
-        mat-fab
-        class="back-icon-btn"
-        (click)="goBack()"
-      >
-        <mat-icon>arrow_back_ios</mat-icon>
-      </button>
-      <div class="ticket-container__label">Select Seats</div>
-      <div style="width: 48px;"></div>
-    </div>
+	<div class="ticket-container__header">
+		<button
+			mat-fab
+			class="back-icon-btn"
+			(click)="goBack()"
+		>
+			<mat-icon>arrow_back_ios</mat-icon>
+		</button>
+		<div class="ticket-container__label">Select Seats</div>
+		<div style="width: 48px;"></div>
+	</div>
+	<div class="ticket-container__content">
+		<div class="name">
+			<div class="name__label">{{ currentMovie?.Title}}</div>
+		</div>
+		<div class="date-section__container">
+			<div class="date-section">
+				<div class="date-section__selected">Date: {{ selectedDate | date: 'fullDate'}}</div>
+				<div class="date-section__icon-select">
+					<input [matDatepicker]="picker" [(ngModel)]="selectedDate"
+					placeholder="Choose a date">
+					<span class="material-symbols-outlined clickable" (click)="picker.open()">
+						calendar_today
+					</span>
+					<mat-datepicker #picker ></mat-datepicker>
+				</div>
+			</div>
+		</div>
+		<div class="ticket-screen-line-container">
+			<div class="ticket-screen-line"></div>
+		</div>
+		<div class="ticket-screen-label">Screen</div>
+		<div class="ticket-container__content__seat-picker">
+			<div class="seat-row-parent">
+				<ng-container *ngFor="let seatNumber of allSeats">
+					<div
+						class="{{
+							'row-single seat-row' + (seatNumber+1)
+						}}"
+						[ngClass]="{
+							'row-single--selected': selectedSeats.includes(seatNumber),
+							'row-single--reserved': reservedSeats.includes(seatNumber),
+						}"
+						(click)="toggleSeat(seatNumber)"
+					></div>
+				</ng-container>
+			</div>
+			<div class="legend">
+				<div class="legend__row">
+					<div class="legend__box legend__box--available"></div>
+					<span>Available</span>
+				</div>
+				<div class="legend__row">
+					<div class="legend__box legend__box--reserved"></div>
+					<span>Reserved</span>
+				</div>
+				<div class="legend__row">
+					<div class="legend__box legend__box--selected"></div>
+					<span>Selected</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="ticket-container__footer">
+		<div class="ticket-container__footer__left">
+			<div class="ticket-container__footer__left__seats-count">
+				{{ selectedSeats.length }} Seats
+			</div>
+			<div class="ticket-container__footer__left__seats-total">${{ getTotalPrice() | number : '1.2-2' }}</div>
+		</div>
+		<div class="ticket-container__footer__right">
+			<button mat-button class="buy-now-btn" [disabled]="selectedSeats.length === 0" (click)="buyNow()">Buy now</button>
+		</div>
+	</div>
 </div>

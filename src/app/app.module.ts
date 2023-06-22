@@ -21,6 +21,10 @@ import { NowShowingComponent } from './now-showing/now-showing.component';
 import { SearchCategoriesComponent } from './search-categories/search-categories.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { PurchaseFinalizedComponent } from './purchase-finalized/purchase-finalized.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.compo
     SearchCategoriesComponent,
     LoaderComponent,
     TicketPurchaseComponent,
+    PurchaseFinalizedComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,10 @@ import { TicketPurchaseComponent } from './ticket-purchase/ticket-purchase.compo
     BrowserAnimationsModule,
     NgxPaginationModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent],

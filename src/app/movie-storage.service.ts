@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Movie } from './movie';
 
 class StorageMovieClass {
 	title: string;
@@ -9,6 +10,14 @@ class StorageMovieClass {
 	providedIn: 'root'
 })
 export class MovieStorageService {
+	private currentMovie: Movie = null;
+
+	public getCurrentMovie(): Movie {
+		return this.currentMovie;
+	}
+	public setCurrentMovie(movie: Movie): void {
+		this.currentMovie = movie;
+	}
 
 	public addMovieToStorage(titleParam: string, posterParam: string, imdbIdParam: string) {
 		const savedMovies = [];
