@@ -9,6 +9,14 @@
     overflow-x: clip;
     box-sizing: content-box;
     padding-bottom: 100px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        &__nested {
+            max-width: 550px;
+        }
+    }
 }
 .search-results {
     &__label {

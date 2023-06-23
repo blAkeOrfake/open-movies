@@ -19,10 +19,7 @@ export class MoviesListComponent {
 
 	_searchInput: string;
 	loading = false;
-	// @Input() set searchInput(value: string) {
-	// 	this._searchInput = value;
-	// 	this.loadMovies();
-	// };
+
 	get searchInput(): string {
 		return this._searchInput;
 	}

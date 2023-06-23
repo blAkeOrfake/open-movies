@@ -17,6 +17,7 @@
 					placeholder="Search movie"
 					[(ngModel)]="searchInput"
 					name="searchInput"
+					(keyup.enter)="handleSubmit()"
 				/>
 			</div>
 		</div>
