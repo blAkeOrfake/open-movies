@@ -1374,15 +1374,35 @@ function TicketPurchaseComponent_ng_container_29_Template(rf, ctx) {
   }
 }
 class TicketPurchaseComponent {
+  get reservedSeats() {
+    const savedReservedSeats = this.savedReservedSeats.find(x => x.date.toISOString() === this.selectedDate.toISOString());
+    if (savedReservedSeats) {
+      return savedReservedSeats.reserved;
+    } else {
+      const reservedCount = this.randomIntFromInterval(1, 12);
+      const newReservedSeats = [];
+      for (let i = 0; i < reservedCount; i++) {
+        const seat = this.randomIntFromInterval(0, 59);
+        if (newReservedSeats.indexOf(seat) === -1) {
+          newReservedSeats.push(seat);
+        }
+      }
+      this.savedReservedSeats.push({
+        date: this.selectedDate,
+        reserved: newReservedSeats
+      });
+      return newReservedSeats;
+    }
+  }
   constructor(movieStorageService, cd, router, receiptService) {
     this.movieStorageService = movieStorageService;
     this.cd = cd;
     this.router = router;
     this.receiptService = receiptService;
     this.ticketPrice = 18.99;
-    this.selectedDate = Date.now();
+    this.selectedDate = new Date();
     this.allSeats = Array(60).fill(0).map((x, i) => i);
-    this.reservedSeats = [11, 20, 32, 33, 47, 48, 53, 54, 57];
+    this.savedReservedSeats = [];
     this.selectedSeats = [];
     this.currentMovie = null;
     this.purchaseForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__.FormGroup({
@@ -1427,6 +1447,9 @@ class TicketPurchaseComponent {
     this.router.navigate(['purchaseFinalized'], {
       queryParams: {}
     });
+  }
+  randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
   static #_ = this.ɵfac = function TicketPurchaseComponent_Factory(t) {
     return new (t || TicketPurchaseComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_movie_storage_service__WEBPACK_IMPORTED_MODULE_0__.MovieStorageService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.ChangeDetectorRef), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_receipt_service__WEBPACK_IMPORTED_MODULE_1__.ReceiptService));
@@ -1600,7 +1623,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
   production: false,
-  APIEndpoint: 'http://www.omdbapi.com/',
+  APIEndpoint: 'https://www.omdbapi.com/',
   APIKey: 'f0c79fe8'
 };
 /*
