@@ -10,4 +10,3 @@ export class AppComponent {
 
 }
 
-// https://dribbble.com/shots/15825649--MUPI-Cinema-Booking-Apps/attachments/7642249?mode=media
