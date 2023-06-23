@@ -17,6 +17,11 @@ export class PurchaseFinalizedComponent implements OnInit {
   ngOnInit(): void {
     this.receipt = this.receiptService.getCurrentReceipt();
   }
+
+  getOrderNo(): string {
+    // return random order number of 8 digits
+    return Math.floor(10000000 + Math.random() * 90000000).toString();
+  }
   goBack(): void {
 		this.router.navigate(['/']);
 	}

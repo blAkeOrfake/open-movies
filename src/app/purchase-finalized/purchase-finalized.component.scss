@@ -8,6 +8,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     box-sizing: content-box;
+
     // padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
 
     padding-bottom: 100px;
@@ -43,6 +44,12 @@
         }
     }
     &__content {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 64px;
+
         color: #555E7A;
         font-size: 22px;
         font-weight: 400;

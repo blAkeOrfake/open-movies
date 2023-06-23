@@ -14,14 +14,20 @@
 		<div style="width: 48px;"></div>
 	</div>
 	<div class="ticket-container__content">
-        <table>
-            <tr><td class="label">Movie: </td><td class="value"> {{ receipt.title }}</td></tr>
-            <tr><td class="label">Date: </td><td class="value"> {{ receipt.date | date: 'fullDate'}}</td></tr>
-            <tr><td class="label">Tickets: </td><td class="value"> {{ receipt.tickets }}x</td></tr>
-
-            <tr><td class="label">Seats: </td><td class="value"> {{ receipt.seats?.join(', ') }}</td></tr>
-            <tr><td class="label">Total: </td><td class="value"> ${{ receipt.total | number:'2.2' }}</td></tr>
-        </table>
+        <div>
+            <table>
+                <tr><td class="label">Movie: </td><td class="value">{{ receipt?.title }}</td></tr>
+                <tr><td class="label">Date: </td><td class="value">{{ receipt?.date | date: 'fullDate'}}</td></tr>
+                <tr><td class="label">Tickets: </td><td class="value">{{ receipt?.tickets }}x</td></tr>
+    
+                <tr><td class="label">Seats: </td><td class="value">{{ receipt?.seats?.join(', ') }}</td></tr>
+                <tr><td class="label">Total: </td><td class="value">${{ receipt?.total | number:'2.2' }}</td></tr>
+                <tr><td class="label">Order no: </td><td class="value"> {{ getOrderNo() }}</td></tr>
+            </table>
+        </div>
+        <div>
+            <img src="assets/images/qr_code.png" alt="ticket" class="ticket-image" />
+        </div>
 	</div>
 	<div class="ticket-container__footer">
 		
